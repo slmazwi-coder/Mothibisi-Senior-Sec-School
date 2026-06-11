@@ -1,174 +1,154 @@
-import React, { useState } from 'react';
-import { Menu, X } from 'lucide-react';
+import React from 'react';
+import { Link, useLocation } from 'react-router-dom';
+import { Menu, X, User } from 'lucide-react';
+import { cn } from '../lib/utils';
 
 const navLinks = [
-  { name: 'Home', href: '#hero' },
-  { name: 'About', href: '#about' },
-  { name: 'Academics', href: '#academics' },
-  { name: 'Facilities', href: '#facilities' },
-  { name: 'Admissions', href: '#admissions' },
-  { name: 'Gallery', href: '#gallery' },
-  { name: 'News', href: '#news' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'Home', path: '/' },
+  { name: 'About', path: '/about' },
+  { name: 'Staff', path: '/staff' },
+  { name: 'Documents', path: '/documents' },
+  { name: 'Achievements', path: '/achievements' },
+  { name: 'Sport', path: '/sport' },
+  { name: 'Activities', path: '/activities' },
+  { name: 'General Application', path: '/admissions' },
+  { name: 'Boarding Application', path: '/boarding' },
+  { name: 'Contact', path: '/contact' },
 ];
 
 export const Navbar = () => {
-  const [isOpen, setIsOpen] = useState(false);
-
-  const handleNavClick = (href: string) => {
-    setIsOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const [isOpen, setIsOpen] = React.useState(false);
+  const location = useLocation();
 
   return (
-    <nav style={{
-      position: 'sticky',
-      top: 0,
-      zIndex: 100,
-      background: '#FFFFFF',
-      borderBottom: '3px solid #800020',
-      boxShadow: '0 2px 10px rgba(128, 0, 32, 0.1)',
-    }}>
-      <div className="container" style={{ padding: '0 20px' }}>
-        <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', height: '70px' }}>
-          {/* Logo & School Name */}
-          <a href="#hero" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
-            <div style={{
-              width: '50px',
-              height: '50px',
-              borderRadius: '8px',
-              background: '#800020',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              border: '2px solid #800020',
-            }}>
-              <span style={{ fontSize: '1.5rem' }}>🏔️</span>
-            </div>
-            <div>
-              <div style={{ fontFamily: "'Playfair Display', Georgia, serif", fontWeight: 900, fontSize: '1.1rem', color: '#800020' }}>
-                MOTHIBISI SSS
-              </div>
-              <div style={{ fontSize: '0.7rem', color: '#666', fontWeight: 600, letterSpacing: '0.1em', textTransform: 'uppercase' }}>
-                We Strive to Excel
-              </div>
-            </div>
-          </a>
+    <nav className="w-full sticky top-0 z-50" style={ { background: '#800020', borderBottom: '3px solid #FFFFFF' } }>
 
-          {/* Desktop Navigation */}
-          <div style={{ display: 'flex', gap: '8px' }} className="desktop-nav">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                style={{
-                  padding: '8px 16px',
-                  fontSize: '0.9rem',
-                  fontWeight: 600,
-                  color: '#222222',
-                  borderRadius: '6px',
-                  transition: 'all 0.2s',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.background = '#F5E6EA';
-                  e.currentTarget.style.color = '#800020';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.background = 'transparent';
-                  e.currentTarget.style.color = '#222222';
-                }}
+      {/* ── Top bar: Logo + School name + Student Portal ── */}
+      <div className="w-full" style={ { borderBottom: '1px solid rgba(123,28,46,0.3)' } }>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-between h-16">
+
+            {/* Logo + Name */}
+            <Link to="/" className="flex items-center gap-3 min-w-0 flex-1">
+              <div className="h-11 w-11 shrink-0 rounded-xl bg-white flex items-center justify-center overflow-hidden shadow-md" style={ { border: '2px solid #FFFFFF' } }>
+                <img
+                  src="/mslogo.png"
+                  alt="Mothibisi SSS logo"
+                  className="h-full w-full object-cover"
+                />
+              </div>
+              <div className="min-w-0">
+                <span className="md:hidden text-sm font-bold block leading-tight" style={ { color: '#FFFFFF' } }>
+                  Mothibisi SSS
+                </span>
+                <span className="hidden md:block text-base font-bold leading-tight" style={ { color: '#FFFFFF' } }>
+                  Mothibisi Senior Secondary School
+                </span>
+                <span className="text-xs font-semibold tracking-wide uppercase" style={ { color: 'rgba(123,28,46,0.7)' } }>
+                  We Strive to Excel
+                </span>
+              </div>
+            </Link>
+
+            {/* Desktop: Student Portal button */}
+            <div className="hidden md:flex items-center gap-3 shrink-0">
+              <Link
+                to="/student/login"
+                className={cn(
+                  'px-4 py-2 rounded-lg text-sm font-bold transition-colors inline-flex items-center gap-2',
+                  location.pathname.startsWith('/student')
+                    ? 'text-[#800020] bg-[#FFFFFF]'
+                    : 'text-[#FFFFFF] border-2 border-[#FFFFFF] hover:bg-[#FFFFFF] hover:text-[#800020]'
+                )}
               >
-                {link.name}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
-              style={{
-                padding: '8px 16px',
-                fontSize: '0.9rem',
-                fontWeight: 700,
-                color: '#FFFFFF',
-                background: '#800020',
-                borderRadius: '20px',
-                marginLeft: '8px',
-                display: 'flex',
-                alignItems: 'center',
-                gap: '6px',
-              }}
-            >
-              🤖 Ask Mothibisi
-            </a>
-          </div>
+                <User size={15} /> Student Portal
+              </Link>
+            </div>
 
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            style={{
-              background: 'none',
-              border: 'none',
-              padding: '8px',
-              cursor: 'pointer',
-              display: 'none',
-            }}
-            className="mobile-menu-btn"
-            aria-label="Toggle menu"
-          >
-            {isOpen ? <X size={28} color="#800020" /> : <Menu size={28} color="#800020" />}
-          </button>
+            {/* Mobile: hamburger */}
+            <div className="md:hidden flex items-center shrink-0 ml-2">
+              <button
+                onClick={() => setIsOpen(!isOpen)}
+                className="p-2"
+                style={ { color: '#FFFFFF' } }
+                aria-label="Open menu"
+              >
+                {isOpen ? <X size={26} /> : <Menu size={26} />}
+              </button>
+            </div>
+          </div>
         </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div style={{
-            borderTop: '1px solid #F5E6EA',
-            padding: '16px 0',
-          }}>
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                onClick={(e) => { e.preventDefault(); handleNavClick(link.href); }}
-                style={{
-                  display: 'block',
-                  padding: '12px 16px',
-                  fontSize: '1rem',
-                  fontWeight: 600,
-                  color: '#222222',
-                  borderBottom: '1px solid #F5E6EA',
-                }}
-              >
-                {link.name}
-              </a>
-            ))}
-            <a
-              href="#contact"
-              onClick={(e) => { e.preventDefault(); handleNavClick('#contact'); }}
-              style={{
-                display: 'block',
-                padding: '12px 16px',
-                fontSize: '1rem',
-                fontWeight: 700,
-                color: '#800020',
-                marginTop: '8px',
-              }}
-            >
-              🤖 Ask Mothibisi
-            </a>
-          </div>
-        )}
       </div>
 
-      <style>{`
-        @media (max-width: 900px) {
-          .desktop-nav { display: none !important; }
-          .mobile-menu-btn { display: block !important; }
-        }
-      `}</style>
+      {/* ── Bottom bar: Nav links (desktop only) ── */}
+      <div className="hidden md:block w-full" style={ { background: '#800020' } }>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="flex items-center justify-center flex-wrap gap-x-1 gap-y-0 py-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                className="px-3 py-2 rounded-md text-sm font-medium transition-colors whitespace-nowrap"
+                style={
+                  location.pathname === link.path
+                    ? { color: '#800020', background: '#FFFFFF', fontWeight: 700 }
+                    : { color: '#FFFFFF' }
+                }
+                onMouseEnter={e => {
+                  if (location.pathname !== link.path) {
+                    (e.target as HTMLElement).style.background = 'rgba(123,28,46,0.12)';
+                  }
+                }}
+                onMouseLeave={e => {
+                  if (location.pathname !== link.path) {
+                    (e.target as HTMLElement).style.background = 'transparent';
+                  }
+                }}
+              >
+                {link.name}
+              </Link>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      {/* ── Mobile dropdown ── */}
+      {isOpen && (
+        <div className="md:hidden shadow-lg" style={ { background: '#800020', borderTop: '1px solid rgba(123,28,46,0.3)' } }>
+          <div className="px-3 pt-2 pb-4 space-y-1">
+            {navLinks.map((link) => (
+              <Link
+                key={link.path}
+                to={link.path}
+                onClick={() => setIsOpen(false)}
+                className="flex items-center px-4 py-3 rounded-lg text-sm font-medium transition-colors"
+                style={
+                  location.pathname === link.path
+                    ? { color: '#800020', background: '#FFFFFF', fontWeight: 700 }
+                    : { color: '#FFFFFF' }
+                }
+              >
+                {link.name}
+              </Link>
+            ))}
+
+            <div className="pt-2" style={ { borderTop: '1px solid rgba(123,28,46,0.3)' } }>
+              <Link
+                to="/student/login"
+                onClick={() => setIsOpen(false)}
+                className="flex items-center gap-2 px-4 py-3 rounded-lg text-sm font-bold transition-colors"
+                style={
+                  location.pathname.startsWith('/student')
+                    ? { color: '#800020', background: '#FFFFFF' }
+                    : { color: '#FFFFFF', background: 'rgba(123,28,46,0.1)' }
+                }
+              >
+                <User size={15} /> Student Portal
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
     </nav>
   );
 };

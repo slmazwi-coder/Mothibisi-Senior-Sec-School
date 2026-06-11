@@ -1,170 +1,169 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+const slides = [
+  { url: './mshero1.png', caption: 'Academic excellence' },
+  { url: './mshero2.png', caption: 'We Strive to Excel' },
+  { url: './mshero3.png', caption: 'Provincial athletics champions' },
+  { url: './mshero4.png', caption: 'Our learners, our pride' },
+  { url: './mshero5.png', caption: 'Celebrating achievement' },
+  { url: './assets/hero/mshero1.png', caption: 'Discipline and hard work' },
+  { url: './assets/hero/mshero2.png', caption: 'The spirit of Mothibisi SSS' },
+  { url: './assets/hero/mshero3.png', caption: 'Medal winners — Eastern Cape' },
+  { url: './assets/hero/mshero4.png', caption: 'Graduation and certificates' },
+  { url: './assets/hero/mshero5.png', caption: 'Community and culture' },
+  { url: './assets/hero/mshero1.png', caption: 'Leadership and excellence' },
+  { url: './assets/hero/mshero2.png', caption: 'Tie ceremony — hard work pays' },
+  { url: './assets/hero/mshero3.png', caption: 'Together we rise' },
+];
 
 export const Hero = () => {
-  const scrollTo = (id: string) => {
-    const element = document.querySelector(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % slides.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, []);
+
+  const next = () => setCurrentIndex((prev) => (prev + 1) % slides.length);
+  const prev = () => setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
+
+  const slide = slides[currentIndex];
 
   return (
-    <section id="hero" style={{
-      minHeight: '85vh',
-      background: 'linear-gradient(135deg, #800020 0%, #5C0015 50%, #1A1A1A 100%)',
-      display: 'flex',
-      alignItems: 'center',
-      justifyContent: 'center',
-      position: 'relative',
-      overflow: 'hidden',
-      padding: '60px 20px',
-    }}>
-      {/* Decorative mountain silhouette */}
-      <div style={{
-        position: 'absolute',
-        bottom: 0,
-        left: 0,
-        right: 0,
-        height: '200px',
-        background: 'linear-gradient(to top, rgba(26, 26, 26, 0.4) 0%, transparent 100%)',
-      }} />
-      
-      {/* Mountain peaks decoration */}
-      <svg style={{ position: 'absolute', bottom: 0, left: 0, width: '100%', height: '150px' }} preserveAspectRatio="none">
-        <path d="M0,150 L150,30 L300,80 L450,20 L600,60 L750,10 L900,50 L1050,25 L1200,70 L1200,150 Z" fill="rgba(26,26,26,0.3)" />
-        <path d="M0,150 L200,60 L400,100 L600,40 L800,90 L1000,50 L1200,100 L1200,150 Z" fill="rgba(92,0,21,0.2)" />
-      </svg>
-
-      <div style={{ textAlign: 'center', position: 'relative', zIndex: 2, maxWidth: '800px' }}>
-        {/* School crest placeholder */}
-        <div style={{
-          width: '120px',
-          height: '120px',
-          margin: '0 auto 24px',
-          background: 'rgba(255,255,255,0.1)',
-          borderRadius: '50%',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'center',
-          border: '4px solid rgba(255,255,255,0.3)',
-        }}>
-          <span style={{ fontSize: '3rem' }}>🏔️</span>
-        </div>
-
-        <h1 style={{
-          fontFamily: "'Playfair Display', Georgia, serif",
-          fontSize: 'clamp(2.5rem, 6vw, 4rem)',
-          fontWeight: 900,
-          color: '#FFFFFF',
-          marginBottom: '16px',
-          textTransform: 'uppercase',
-          letterSpacing: '0.05em',
-        }}>
-          We Strive to Excel
-        </h1>
-
-        <p style={{
-          fontSize: 'clamp(1rem, 2vw, 1.3rem)',
-          color: 'rgba(255,255,255,0.9)',
-          marginBottom: '32px',
-          lineHeight: 1.6,
-          fontWeight: 300,
-        }}>
-          Nurturing academic excellence and lifelong achievement<br />in the heart of the Eastern Cape
-        </p>
-
-        <div style={{ display: 'flex', gap: '16px', justifyContent: 'center', flexWrap: 'wrap' }}>
-          <button
-            onClick={() => scrollTo('#about')}
+    <div className="relative h-[650px] w-full overflow-hidden" style={{ background: '#800020' }}>
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={currentIndex}
+          initial={{ opacity: 0, scale: 1.03 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
+          className="absolute inset-0"
+        >
+          <img
+            src={slide.url}
+            alt={slide.caption}
+            className="h-full w-full object-cover object-center"
+            style={{ opacity: 0.45 }}
+          />
+          <div
+            className="absolute inset-0"
             style={{
-              padding: '14px 32px',
-              background: '#FFFFFF',
-              color: '#800020',
-              border: 'none',
-              borderRadius: '30px',
-              fontSize: '1rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              transition: 'all 0.3s',
+              background:
+                'linear-gradient(to top, rgba(128,0,32,0.92) 0%, rgba(128,0,32,0.55) 45%, rgba(26,10,15,0.35) 100%)',
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.transform = 'translateY(-3px)';
-              e.currentTarget.style.boxShadow = '0 8px 20px rgba(0,0,0,0.3)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.transform = 'translateY(0)';
-              e.currentTarget.style.boxShadow = 'none';
-            }}
+          />
+        </motion.div>
+      </AnimatePresence>
+
+      <div className="absolute bottom-24 left-0 right-0 text-center z-20 px-4">
+        <AnimatePresence mode="wait">
+          <motion.p
+            key={`caption-${currentIndex}`}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.35 }}
+            className="text-base md:text-lg font-medium tracking-widest uppercase"
+            style={{ color: 'rgba(255,255,255,0.85)' }}
           >
-            Explore Our School
-          </button>
-          <button
-            onClick={() => scrollTo('#admissions')}
-            style={{
-              padding: '14px 32px',
-              background: 'transparent',
-              color: '#FFFFFF',
-              border: '2px solid #FFFFFF',
-              borderRadius: '30px',
-              fontSize: '1rem',
-              fontWeight: 700,
-              cursor: 'pointer',
-              textTransform: 'uppercase',
-              letterSpacing: '0.05em',
-              transition: 'all 0.3s',
+            {slide.caption}
+          </motion.p>
+        </AnimatePresence>
+      </div>
+
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="mb-5"
+        >
+          <img
+            src="./mslogo.png"
+            alt="Mothibisi SSS crest"
+            className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-2xl mx-auto"
+            style={{ border: '3px solid #FFFFFF' }}
+            onError={(e) => {
+              (e.currentTarget as HTMLImageElement).style.display = 'none';
             }}
-            onMouseEnter={(e) => {
-              e.currentTarget.style.background = 'rgba(255,255,255,0.15)';
-            }}
-            onMouseLeave={(e) => {
-              e.currentTarget.style.background = 'transparent';
-            }}
+          />
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-4xl md:text-6xl font-extrabold mb-3 uppercase tracking-wider"
+          style={{ color: '#FFFFFF' }}
+        >
+          Mothibisi SSS
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.18 }}
+          className="text-base md:text-xl font-light italic mb-8"
+          style={{ color: 'rgba(255,255,255,0.8)' }}
+        >
+          "We Strive to Excel"
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.26 }}
+          className="flex gap-4 flex-wrap justify-center"
+        >
+          <a
+            href="/admissions"
+            className="px-7 py-3 font-bold transition-all rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            style={{ background: '#FFFFFF', color: '#800020' }}
           >
             Apply Now
-          </button>
-        </div>
+          </a>
+          <a
+            href="/about"
+            className="px-7 py-3 font-bold transition-all rounded-lg hover:-translate-y-0.5"
+            style={{ border: '2px solid #FFFFFF', color: '#FFFFFF', background: 'transparent' }}
+          >
+            About Us
+          </a>
+        </motion.div>
       </div>
 
-      {/* Scroll indicator */}
-      <div style={{
-        position: 'absolute',
-        bottom: '30px',
-        left: '50%',
-        transform: 'translateX(-50%)',
-        animation: 'bounce 2s infinite',
-      }}>
-        <div style={{
-          width: '30px',
-          height: '50px',
-          border: '3px solid rgba(255,255,255,0.5)',
-          borderRadius: '15px',
-          display: 'flex',
-          justifyContent: 'center',
-          paddingTop: '10px',
-        }}>
-          <div style={{
-            width: '6px',
-            height: '10px',
-            background: '#FFFFFF',
-            borderRadius: '3px',
-            animation: 'scroll 2s infinite',
-          }} />
-        </div>
-      </div>
+      <button
+        onClick={prev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full z-20 transition-all hover:scale-110"
+        style={{ background: 'rgba(255,255,255,0.2)', color: '#FFFFFF' }}
+        aria-label="Previous"
+      >
+        <ChevronLeft size={32} />
+      </button>
+      <button
+        onClick={next}
+        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full z-20 transition-all hover:scale-110"
+        style={{ background: 'rgba(255,255,255,0.2)', color: '#FFFFFF' }}
+        aria-label="Next"
+      >
+        <ChevronRight size={32} />
+      </button>
 
-      <style>{`
-        @keyframes bounce {
-          0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-          40% { transform: translateX(-50%) translateY(-10px); }
-          60% { transform: translateX(-50%) translateY(-5px); }
-        }
-        @keyframes scroll {
-          0% { opacity: 1; transform: translateY(0); }
-          100% { opacity: 0; transform: translateY(15px); }
-        }
-      `}</style>
-    </section>
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-30 flex-wrap justify-center max-w-xs">
+        {slides.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrentIndex(i)}
+            className="h-2 w-2 rounded-full transition-all"
+            style={{ background: i === currentIndex ? '#FFFFFF' : 'rgba(255,255,255,0.3)' }}
+          />
+        ))}
+      </div>
+    </div>
   );
 };
