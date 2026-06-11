@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const Admissions = () => {
   const requirements = [
     'Latest school report / academic records',

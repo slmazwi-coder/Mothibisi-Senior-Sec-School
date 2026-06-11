@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const Uniform = () => {
   const colors = [
     { name: 'Maroon / Burgundy', hex: '#800020' },
