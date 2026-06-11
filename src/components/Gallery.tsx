@@ -1,5 +1,3 @@
-import React from 'react';
-
 const galleryItems = [
   {
     title: 'Learners in Winter Sportswear',

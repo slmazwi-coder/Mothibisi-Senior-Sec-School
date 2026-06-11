@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const Academics = () => {
   const subjects = [
     'Mathematics / Mathematical Literacy',

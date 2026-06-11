@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const Hero = () => {
   const scrollTo = (id: string) => {
     const element = document.querySelector(id);

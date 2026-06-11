@@ -1,5 +1,3 @@
-import React from 'react';
-
 const newsItems = [
   {
     title: '2026 Applications Now Open',
