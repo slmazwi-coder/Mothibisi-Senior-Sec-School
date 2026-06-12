@@ -1,3 +1,22 @@
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'motion/react';
+import { ChevronLeft, ChevronRight } from 'lucide-react';
+
+const slides = [
+  {
+    url: 'https://images.unsplash.com/photo-1580582932707-520aed937b7b?w=1600&q=80',
+    caption: 'Excellence in Education',
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600&q=80',
+    caption: 'Building Tomorrow\'s Leaders',
+  },
+  {
+    url: 'https://images.unsplash.com/photo-1541339907198-e08756dedf3d?w=1600&q=80',
+    caption: 'Nurturing Talents & Skills',
+  },
+];
+
 export const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
