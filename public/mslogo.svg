@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 200">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#800020"/>
+      <stop offset="100%" style="stop-color:#5c0018"/>
+    </linearGradient>
+  </defs>
+  <circle cx="100" cy="100" r="95" fill="url(#bg)" stroke="#FFD700" stroke-width="3"/>
+  <circle cx="100" cy="100" r="75" fill="none" stroke="#FFD700" stroke-width="1.5"/>
+  <path d="M60 70 L140 70 L135 130 L65 130 Z" fill="none" stroke="#FFD700" stroke-width="2"/>
+  <line x1="100" y1="70" x2="100" y2="130" stroke="#FFD700" stroke-width="2"/>
+  <path d="M60 70 Q80 85 100 70" fill="none" stroke="#FFD700" stroke-width="1.5"/>
+  <path d="M100 70 Q120 85 140 70" fill="none" stroke="#FFD700" stroke-width="1.5"/>
+  <text x="100" y="160" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#FFD700" text-anchor="middle">MSS</text>
+</svg>

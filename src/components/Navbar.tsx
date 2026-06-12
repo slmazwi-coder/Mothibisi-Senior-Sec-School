@@ -27,7 +27,7 @@ export const Navbar = () => {
           <div className="flex items-center justify-between h-16">
             <Link to="/" className="flex items-center gap-3 min-w-0 flex-1">
               <div className="h-11 w-11 shrink-0 rounded-xl bg-white flex items-center justify-center overflow-hidden shadow-md" style={{ border: '2px solid #FFFFFF' }}>
-                <img src="/mslogo.png" alt="Mothibisi SSS logo" className="h-full w-full object-cover" />
+                <img src="/mslogo.jpg" alt="Mothibisi SSS logo" className="h-full w-full object-cover" />
               </div>
               <div className="min-w-0">
                 <div className="text-white font-bold text-base leading-tight truncate">Mothibisi SSS</div>

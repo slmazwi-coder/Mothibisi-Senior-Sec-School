@@ -83,7 +83,7 @@ export const Hero = () => {
           className="mb-5"
         >
           <img
-            src="./mslogo.png"
+            src="/mslogo.jpg"
             alt="Mothibisi SSS crest"
             className="w-20 h-20 md:w-24 md:h-24 rounded-full object-cover shadow-2xl mx-auto"
             style={{ border: '3px solid #FFFFFF' }}
