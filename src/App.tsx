@@ -64,7 +64,7 @@ export default function App() {
         <Route path="/contact" element={<PageShell><Contact /></PageShell>} />
 
         {/* Student portal routes */}
-        <Route path="/student/login" element={<StudentLogin />} />
+        <Route path="/student-login" element={<StudentLogin />} />
         <Route path="/student" element={<StudentPortal />} />
 
         {/* Admin routes */}
